@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>layui</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="static/frame/layui/css/layui.css"
+	media="all">
+</head>
+<body>
+	<div style="margin-left: 35%">
+		<form action="uploadExcel" method="post" enctype="multipart/form-data">
+			<div class="layui-upload">
+				<div class="layui-form-item">
+					&nbsp;&nbsp;&nbsp;<i class="layui-icon"
+						style="font-size: 70px; color: #1E9FFF;">&#xe62f;</i> <br> <br>
+					<button type="button" class="layui-btn layui-btn-normal" id="test8"
+						name="fileItem">选择文件</button>
+					<br> <br>
+					<button type="submit" class="layui-btn">开始上传</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="static/js/layui.js" charset="utf-8"></script>
+	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+	<script>
+		layui.use('upload', function() {
+			var $ = layui.jquery, upload = layui.upload;
+
+			//选完文件后不自动上传
+			upload.render({
+				elem : '#test8',
+				url : 'uploadExcel',
+				auto : false,
+				exts : 'xls'
+				//,multiple: true
+				,
+				bindAction : '#test9',
+				done : function(res) {
+					console.log(res)
+				}
+			});
+
+		});
+	</script>
+
+</body>
+</html>

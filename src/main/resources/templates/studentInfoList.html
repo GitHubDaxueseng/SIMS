@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>表格</title>
+<link rel="stylesheet" href="../static/frame/layui/css/layui.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body class="body">
+	<div id="popupFormDiv" style="display: none;"></div>
+	<fieldset class="layui-elem-field">
+		<legend>学生列表</legend>
+		<div class="layui-field-box">
+			<form action="" method="post" id="searchForm" class="layui-form">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">模糊查询</label>
+						<div class="layui-input-inline">
+							<input placeholder="学号/身份证/姓名" type="text" name="" value=""
+								class="layui-input">
+						</div>
+					</div>
+
+					<div class="layui-inline" style="float: right;">
+						<input type="button"
+							class="layui-btn layui-btn-small layui-btn-safe" value="查询">
+						<input type="button" onclick="input()"
+							class="layui-btn layui-btn-small layui-btn-safe" value="添加">
+						<input type="button" onclick="upload()"
+							class="layui-btn layui-btn-small layui-btn-danger" value="批量导入">
+						<input type="button" onclick=""
+							class="layui-btn layui-btn-small layui-btn-danger"
+							value="导出Excel">
+					</div>
+				</div>
+
+				<table class="layui-table" lay-even="" lay-skin="row">
+					<thead>
+						<tr>
+							<td align="center">姓名</td>
+							<td align="center">学号</td>
+							<td align="center">年级</td>
+							<td align="center">出生日期</td>
+							<td align="center">性别</td>
+							<td align="center">身份证号码</td>
+							<td align="center">政治面貌</td>
+							<td align="center">省份</td>
+							<td align="center">操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						#for(stu : stus)
+						<tr class="odd">
+							<td align="center">${stu.name}</td>
+							<td align="center">${stu.student_id}</td>
+							<td align="center">${stu.grade}</td>
+							<td align="center">${stu.birthday.format("yyyy-mm-dd")}</td>
+							<td align="center">${stu.sex}</td>
+							<td align="center">${stu.citizen_id}</td>
+							<td align="center">${stu.political_status}</td>
+							<td align="center">${stu.address}</td>
+							<td align="center">
+								<button onclick="changeOneStu('${stu.student_id}')"
+									class="layui-btn layui-btn" type="button">修改</button> <a
+								href="delelteStu/${stu.student_id}"
+								class="layui-btn layui-btn-danger">删除</a>
+							</td>
+						</tr>
+						#end
+					</tbody>
+				</table>
+			</form>
+			<div id="adminCommonPage" style="text-align: center"></div>
+	</fieldset>
+	<script type="text/javascript" src="../static/frame/layui/layui.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+layui.use(['form', 'layedit', 'laydate','upload','layer'], function(){
+  var $ = layui.jquery, layer = layui.layer; 
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+  
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+ 
+  
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+});
+
+function upload(){
+	layer.open({
+		  type: 2,
+		  title: '上传Excel批量导入',
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['360px', '90%'],
+		  content: 'uploadsf' //iframe的url
+		}); 
+	
+}
+function isDel(){
+	layer.confirm("确认要删除吗，删除后不能恢复", { title: "删除确认" }, function (index) {  
+        layer.close(index);  
+        $.post("/deleteStu/DeleteCustomer", { gid: $(e.currentTarget).data("gid") }, function (data) {  
+            layer.alert(data, {  
+                title: "删除操作",  
+                btn: ['确定']  
+            },  
+                function (index, item) {  
+                    //layer.close(index);  
+                    location.reload();  
+                });  
+        });  
+    });   
+}
+
+/* layui.use('upload', function(){
+	  var $ = layui.jquery
+	  ,upload = layui.upload;
+	  upload.render({
+		    elem: '#test3'
+		    ,url: '/uploads/'
+		    ,accept: 'file' //普通文件
+		    ,done: function(res){
+		      console.log(res)
+		    }
+		  });
+}); */
+</script>
+	<script>
+layui.use('form', function(){
+  var form = layui.form();
+});
+/* 添加一个学生的弹窗js */
+function input(){
+	layer.open({
+		  type: 2,
+		  title: '添加学生信息',
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['380px', '90%'],
+		  content: 'addOneStu' //iframe的url
+		});   
+}
+/* 修改一个学生的弹窗js */
+function changeOneStu(id){
+	layer.open({
+		  type: 2,
+		  title: '更新学生信息',
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['380px', '90%'],
+		  content: 'changeOneStu'+"/"+id //iframe的url
+		});   
+}
+</script>
+	<script>
+function pop(){
+	layer.confirm("确认要删除吗，删除后不能恢复", { title: "删除确认" }, function (index) {  
+		type: 1
+	    layer.close(index);  
+	    $.post("/deleteStu/DeleteCustomer", { gid: $(e.currentTarget).data("gid") }, function (data) {  
+	        layer.alert(data, {  
+	            title: "删除操作",  
+	            btn: ['确定']  
+	        },  
+	            function (index, item) {  
+	                //layer.close(index);  
+	                location.reload();  
+	            });  
+	    });  
+	});  
+} 
+</script>
+</body>
+</html>

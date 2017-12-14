@@ -1,0 +1,11 @@
+{
+	"data": {
+		"id": 12,
+		"account": "root456",
+		"auth_group_name": "测试人员",
+		"last_login_time": "2017-04-04 15:38:02",
+		"last_login_ip": "183.6.230.213",
+		"create_time": "2017-03-11 18:06:48",
+		"status": 1
+	}
+}
