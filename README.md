@@ -36,11 +36,11 @@ public class DBLoadConfig implements BeanProcessor {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/sims?useUnicode=true&characterEncoding=utf-8");
 		dataSource.setUsername("root");
-		dataSource.setPassword("123456");
+		dataSource.setPassword("yourpasswd");
 		...
 		}
 ```
-> Finally, start Application.java in Com.cam (Run as Java Application) </ b>, then visit `yourhost`: 9000 / teacher, everything is ok
+> Finally, start Application.java in Com.cam <b>(Run as Java Application)</b>, then visit `yourhost`: 9000 / teacher, everything is ok
 
 
 
@@ -79,7 +79,7 @@ public class DBLoadConfig implements BeanProcessor {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/sims?useUnicode=true&characterEncoding=utf-8");
 		dataSource.setUsername("root");
-		dataSource.setPassword("123456");
+		dataSource.setPassword("yourpasswd");
 		...
 		}
 ```
