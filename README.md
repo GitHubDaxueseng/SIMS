@@ -87,7 +87,7 @@ public class DBLoadConfig implements BeanProcessor {
 > 启动com.cam中的Application.java <b>(Run as Java Application)</b>，然后访问`yourhost`:9000/teacher，最后，希望各位大佬在右上角砸个Star🌟，一切就完美了👆🏼
 
 ## 问题反馈
-在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
+在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流(注意，这是maven项目，请以maven形式导入并联网拉去jar包)
 
 * 邮件：1273391194cam#gmail.com(将“#”替换为“@”)
 * QQ: 1273391194
