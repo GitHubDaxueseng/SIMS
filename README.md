@@ -89,7 +89,7 @@ public class DBLoadConfig implements BeanProcessor {
 ## 问题反馈
 在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
 
-* 邮件：1273391194cam@gmail.com
+* 邮件：1273391194cam#gmail.com(将“#”替换为“@”)
 * QQ: 1273391194
 
 ## 感激
